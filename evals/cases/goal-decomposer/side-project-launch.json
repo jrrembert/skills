@@ -1,0 +1,9 @@
+{
+  "name": "side-project-launch",
+  "description": "Work-heavy: user has a half-built SaaS and wants to ship it. Personal goals should still be present and not be 'work-adjacent' filler.",
+  "initial_prompt": "I've been building a SaaS side project for like six months and it's 80% done but I keep finding new things to add instead of shipping it. I want to actually launch it in the next sprint. I'm doing this on nights and weekends — my day job is unrelated.",
+  "scripted_user_replies": [
+    "Realistic remaining work: billing integration, a landing page, and onboarding emails. The product itself is solid. The thing that's holding me back is honestly fear that nobody will care once it's live.",
+    "Two weeks is right — that matches my own ship deadline. For accountability, I post in a Twitter/X build-in-public thread already. My partner is also patient about evening work but I should not have her be the accountability person."
+  ]
+}

@@ -1,2 +1,9 @@
 *.zip
 .DS_Store
+
+# Evals
+evals/results/
+evals/.venv/
+__pycache__/
+*.pyc
+.env
