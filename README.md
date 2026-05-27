@@ -18,10 +18,6 @@ npx skills add jrrembert/skills/goal-decomposer
 
 ### [goal-decomposer](./goal-decomposer/SKILL.md)
 
-Decompose a big idea, ambition, or vague life direction into simple, concrete sprint goals with built-in accountability. Turns a fuzzy ambition into a two-week sprint with a theme, 4-6 goals (work + personal), and a lightweight email-based accountability loop inspired by Lenny Rachitsky's post-Airbnb "board of directors" practice.
+Decompose a big idea, ambition, or vague life direction into simple, concrete sprint goals with built-in accountability. Turns a fuzzy ambition into a two-week sprint with a theme, 4-6 goals (work + personal), and a lightweight email-based accountability loop.
 
 Trigger phrases include: "help me figure out what to do next," "I have too many ideas," "I need a plan," or anytime the user is between jobs, on sabbatical, freelancing, or otherwise in an unstructured phase where self-directed goal-setting matters.
-
-## License
-
-MIT
