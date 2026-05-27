@@ -1,5 +1,7 @@
 # skills
 
+[![skills.sh](https://skills.sh/b/jrrembert/skills)](https://skills.sh/jrrembert/skills)
+
 Agent skills by [@jrrembert](https://github.com/jrrembert), discoverable on [skills.sh](https://skills.sh).
 
 ## Install
