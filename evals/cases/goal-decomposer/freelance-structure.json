@@ -1,0 +1,9 @@
+{
+  "name": "freelance-structure",
+  "description": "Just went freelance, needs structure to replace the rhythm of a team.",
+  "initial_prompt": "I just went freelance after seven years at a big agency. I have two clients lined up so revenue isn't an emergency, but I'm realizing how much structure the team gave me. I keep working weird hours and then feeling guilty when I'm not working. I need a way to feel like I'm doing this on purpose.",
+  "scripted_user_replies": [
+    "Day-to-day, I have client work that's just billable hours — I don't think those need to be 'goals'. The stuff I'd actually want goals for is: improving my craft, building a portfolio piece, and maybe seeding what comes after freelancing.",
+    "One week feels too short, two feels right. For accountability, I have a freelance friends Discord — three people I trust. None of them are in my exact field, which is probably good."
+  ]
+}

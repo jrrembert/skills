@@ -1,0 +1,9 @@
+{
+  "name": "scattered-ideas",
+  "description": "User has too many startup ideas and can't pick one. Needs the sprint to force narrowing.",
+  "initial_prompt": "I've got like ten different startup ideas rattling around in my head right now — a dev tool, a vertical SaaS for dentists, a B2B AI thing, an indie consumer app. I keep jumping between them and I'm getting nowhere. Help me get unstuck.",
+  "scripted_user_replies": [
+    "Honestly the dev tool one feels most exciting and I have the most relevant experience there — I've been a backend engineer for 8 years. The dentist one is probably the biggest market but I don't know anything about dentists.",
+    "Two weeks works. I have a Slack group of three other indie hackers who'd be perfect for accountability. We already share progress informally."
+  ]
+}

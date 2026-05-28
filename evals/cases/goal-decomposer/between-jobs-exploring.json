@@ -1,0 +1,9 @@
+{
+  "name": "between-jobs-exploring",
+  "description": "User just left a senior PM role, has runway, wants to explore writing and AI but feels unfocused.",
+  "initial_prompt": "I just left my job as a senior PM after 6 years. I have about 9 months of runway and I want to use this time well, but every day kind of blurs into the next. I have a bunch of ideas — I want to write more, get serious about AI, maybe start something — but I'm not making real progress on any of them.",
+  "scripted_user_replies": [
+    "I'd say I'm closest to writing — I've drafted a couple of essays but never published. AI feels exciting but I'm not sure what 'getting serious' even means. Starting something is the most vague — no concrete idea yet, just a vibe.",
+    "Two weeks feels right. I've got my partner and two close friends from my old job who'd be game to be on a 'board' if I asked. I'd want to keep it light — no big system."
+  ]
+}

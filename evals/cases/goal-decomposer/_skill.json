@@ -1,0 +1,35 @@
+{
+  "name": "goal-decomposer",
+  "skill_path": "../../../goal-decomposer/SKILL.md",
+  "force_prompt": "OK, given everything I've told you, please draft my sprint plan now: a one-line theme, 4-6 concrete goals split into work and personal, and an accountability setup.",
+  "assertions": {
+    "goal_count_min": 4,
+    "goal_count_max": 6,
+    "work_goal_min": 2,
+    "personal_goal_min": 2,
+    "requires_theme": true,
+    "requires_accountability": true
+  },
+  "judge_dimensions": [
+    {
+      "name": "theme_quality",
+      "description": "Theme is a concrete one-line north star that could fit on a sticky note — not a mission statement, not a vague aspiration."
+    },
+    {
+      "name": "goal_specificity",
+      "description": "Goals are concrete, finishable in two weeks, and measurable. They are not vague aspirations like 'learn more about X' without a finishing condition."
+    },
+    {
+      "name": "work_personal_balance",
+      "description": "There is a clear split between work goals (advancing the theme) and personal goals (about how the person wants to live), and both feel substantive."
+    },
+    {
+      "name": "accountability_design",
+      "description": "The accountability setup is lightweight and concrete: who to tell, what cadence, what to send (kickoff + mid + end). Not generic advice to 'find an accountability partner'."
+    },
+    {
+      "name": "overall",
+      "description": "Which response would actually help the user execute a useful two-week sprint?"
+    }
+  ]
+}

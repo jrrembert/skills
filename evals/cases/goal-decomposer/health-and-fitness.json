@@ -1,0 +1,9 @@
+{
+  "name": "health-and-fitness",
+  "description": "Personal-heavy: user wants to get healthier this summer. Work goals should still appear but personal goals lead.",
+  "initial_prompt": "I want to get back into shape this summer. I used to be pretty active — lifted three times a week, ran on weekends — but the last year of crunch at work killed all of that. I also want to use this energy to be better at my actual job, not just abandon work for the gym.",
+  "scripted_user_replies": [
+    "I work as a staff engineer at a mid-size SaaS company. Things have calmed down — I'm not in crunch anymore — but I'm coasting. I'd like to ship something meaningful again. On the health side, lifting is what I miss most. Running I can take or leave.",
+    "Two weeks. My wife would be the natural accountability person, plus I have an old lifting partner I've fallen out of touch with — re-engaging him would actually be part of this."
+  ]
+}

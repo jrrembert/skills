@@ -1,0 +1,9 @@
+{
+  "name": "sabbatical-exploration",
+  "description": "Three-month sabbatical, intentionally vague on outcomes. Goals should respect the exploratory frame, not force startup-style outputs.",
+  "initial_prompt": "I'm three weeks into a three-month sabbatical. I told myself I wouldn't optimize this time but I'm already feeling antsy — like I'm wasting it. I don't want to come out of this with a startup or a launch. I just want to feel like I used the time.",
+  "scripted_user_replies": [
+    "Things that have actually felt good so far: long walks, cooking real meals, picking up the guitar again, and reading non-work books. Things I keep thinking about but not doing: a trip to Japan with my brother, learning some Spanish, writing about what this break has taught me.",
+    "Two weeks works. My brother is the obvious accountability person — he's also in a transition phase. I want to keep the bar low."
+  ]
+}
