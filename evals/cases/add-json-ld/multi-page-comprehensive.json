@@ -1,0 +1,9 @@
+{
+  "name": "multi-page-comprehensive",
+  "description": "Complex personal site with blog, projects, and a curated links page. Tests whether the skill correctly assigns different node combinations to different page types, and whether @id is consistent across all pages.",
+  "initial_prompt": "I'm revamping my personal site and I want to get structured data right from the start. The site covers a bunch of different things — blog, projects, a links/resources page, and an about page. I want each page type to have the right JSON-LD.",
+  "scripted_user_replies": [
+    "Domain is priya.dev. Page structure: priya.dev (root, redirects to /about), priya.dev/about (main about/profile page), priya.dev/blog (blog index), priya.dev/blog/<slug> (individual posts), priya.dev/projects (project showcase index), priya.dev/projects/<name> (individual project), priya.dev/links (curated links page — bookmarks and resources I recommend). I'm a senior frontend engineer at Vercel. Profiles: github.com/priyarao, twitter.com/priyarao, linkedin.com/in/priyarao, mastodon.social/@priyarao.",
+    "I want JSON-LD templates for every page type. Use a real blog post as the example — say the slug is 'building-with-server-components', published 2024-11-15, last modified 2025-01-03, OG image at /images/og/building-with-server-components.png. For projects, use 'formkit' — a form validation library, free, on npm and GitHub at github.com/priyarao/formkit."
+  ]
+}

@@ -58,6 +58,8 @@ class SkillConfig:
     force_prompt: str
     assertions: dict[str, Any]
     judge_dimensions: list[dict[str, str]]
+    parser_prompt: str | None = None
+    judge_task_type: str = ""
 
 
 @dataclass
@@ -88,6 +90,8 @@ def load_skill_config(skill_dir: Path) -> SkillConfig:
         force_prompt=cfg["force_prompt"],
         assertions=cfg["assertions"],
         judge_dimensions=cfg["judge_dimensions"],
+        parser_prompt=cfg.get("parser_prompt"),
+        judge_task_type=cfg.get("judge_task_type", cfg["name"]),
     )
 
 
@@ -179,11 +183,11 @@ Rules:
 - Output ONLY the JSON object, no prose, no code fences."""
 
 
-def parse_output(client, final_assistant: str) -> dict[str, Any]:
+def parse_output(client, final_assistant: str, system_prompt: str | None = None) -> dict[str, Any]:
     resp = client.messages.create(
         model=PARSER_MODEL,
         max_tokens=MAX_TOKENS_PARSE,
-        system=PARSER_SYSTEM,
+        system=system_prompt or PARSER_SYSTEM,
         messages=[{"role": "user", "content": final_assistant}],
     )
     text = "".join(
@@ -226,7 +230,40 @@ def apply_assertions(parsed: dict[str, Any], cfg: dict[str, Any]) -> dict[str, A
     }
 
 
-JUDGE_SYSTEM_TEMPLATE = """You are a blind A/B judge for sprint-planning outputs.
+def apply_assertions_generic(parsed: dict[str, Any], assertions: dict[str, Any]) -> dict[str, Any]:
+    """Generic assertion evaluator driven by key naming conventions.
+
+    Key formats:
+      - ``<field>_min: N``  — ``parsed[field] >= N`` (len if list)
+      - ``<field>_max: N``  — ``parsed[field] <= N`` (len if list)
+      - ``requires_<field>: true`` — ``parsed[field]`` is truthy
+    """
+    checks: dict[str, bool] = {}
+    totals: dict[str, int] = {}
+
+    for key, expected in assertions.items():
+        if key.endswith("_min"):
+            field = key[: -len("_min")]
+            actual = parsed.get(field, 0)
+            if isinstance(actual, list):
+                totals[f"{field}_count"] = len(actual)
+                actual = len(actual)
+            checks[f"{field}_min_met"] = actual >= expected
+        elif key.endswith("_max"):
+            field = key[: -len("_max")]
+            actual = parsed.get(field, 0)
+            if isinstance(actual, list):
+                totals[f"{field}_count"] = len(actual)
+                actual = len(actual)
+            checks[f"{field}_max_met"] = actual <= expected
+        elif key.startswith("requires_"):
+            field = key[len("requires_"):]
+            checks[f"{field}_present"] = bool(parsed.get(field))
+
+    return {"checks": checks, "passed": all(checks.values()), "totals": totals}
+
+
+JUDGE_SYSTEM_TEMPLATE = """You are a blind A/B judge for {task_type} outputs.
 
 You will see two final-turn responses (A and B) to the same user. You do not know which is which. Rate each dimension by picking A, B, or tie, and explain in one sentence what you saw.
 
@@ -249,9 +286,10 @@ def judge_pair(
     out_a: RunOutput,
     out_b: RunOutput,
     dimensions: list[dict[str, str]],
+    task_type: str = "sprint-planning",
 ) -> dict[str, Any]:
     dim_lines = "\n".join(f"- {d['name']}: {d['description']}" for d in dimensions)
-    system = JUDGE_SYSTEM_TEMPLATE.format(dimensions=dim_lines)
+    system = JUDGE_SYSTEM_TEMPLATE.format(task_type=task_type, dimensions=dim_lines)
 
     user = (
         f"User context (description): {case.description}\n\n"
@@ -336,13 +374,17 @@ def render_summary_md(summary: dict[str, Any], case_results: list[dict[str, Any]
         ws = r["with_skill"]["assertions"]
         bl = r["baseline"]["assertions"]
         lines.append(f"### {name}")
+        ws_totals = ws.get("totals", {})
+        bl_totals = bl.get("totals", {})
+        ws_summary = ", ".join(f"{k}: {v}" for k, v in ws_totals.items()) if ws_totals else ""
+        bl_summary = ", ".join(f"{k}: {v}" for k, v in bl_totals.items()) if bl_totals else ""
         lines.append(
-            f"- with-skill: {'PASS' if ws.get('passed') else 'FAIL'} "
-            f"(goals: {ws.get('totals', {}).get('total_goal_count', '?')})"
+            f"- with-skill: {'PASS' if ws.get('passed') else 'FAIL'}"
+            + (f" ({ws_summary})" if ws_summary else "")
         )
         lines.append(
-            f"- baseline: {'PASS' if bl.get('passed') else 'FAIL'} "
-            f"(goals: {bl.get('totals', {}).get('total_goal_count', '?')})"
+            f"- baseline: {'PASS' if bl.get('passed') else 'FAIL'}"
+            + (f" ({bl_summary})" if bl_summary else "")
         )
         if r.get("judge"):
             for v in r["judge"].get("verdicts", []):
@@ -382,10 +424,14 @@ def run_skill(
         baseline.label = "baseline"
 
         print(f"  [{cfg.name}/{case.name}] parsing outputs...")
-        with_skill.parsed = parse_output(client, with_skill.final_assistant)
-        baseline.parsed = parse_output(client, baseline.final_assistant)
-        with_skill.assertions = apply_assertions(with_skill.parsed, cfg.assertions)
-        baseline.assertions = apply_assertions(baseline.parsed, cfg.assertions)
+        with_skill.parsed = parse_output(client, with_skill.final_assistant, cfg.parser_prompt)
+        baseline.parsed = parse_output(client, baseline.final_assistant, cfg.parser_prompt)
+        if cfg.parser_prompt:
+            with_skill.assertions = apply_assertions_generic(with_skill.parsed, cfg.assertions)
+            baseline.assertions = apply_assertions_generic(baseline.parsed, cfg.assertions)
+        else:
+            with_skill.assertions = apply_assertions(with_skill.parsed, cfg.assertions)
+            baseline.assertions = apply_assertions(baseline.parsed, cfg.assertions)
 
         judge_result: dict[str, Any] | None = None
         judge_mapping: dict[str, str] = {}
@@ -398,7 +444,10 @@ def run_skill(
                 "B": out_b.label,
                 "tie": "tie",
             }
-            judge_result = judge_pair(client, case, out_a, out_b, cfg.judge_dimensions)
+            judge_result = judge_pair(
+                client, case, out_a, out_b, cfg.judge_dimensions,
+                task_type=cfg.judge_task_type or cfg.name,
+            )
 
         case_dir = skill_results_dir / case.name
         case_dir.mkdir(parents=True, exist_ok=True)

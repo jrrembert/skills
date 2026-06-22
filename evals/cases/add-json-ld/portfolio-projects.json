@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-projects",
+  "description": "Developer portfolio with software projects. Should produce SoftwareApplication nodes with offers (including price: 0 for FOSS) and correct applicationCategory.",
+  "initial_prompt": "I have a portfolio site at sarahchen.io where I showcase my open-source projects. I want to add structured data so Google can show rich results for my software — especially my main projects which are a CLI tool, a VS Code extension, and a web app.",
+  "scripted_user_replies": [
+    "Site structure: sarahchen.io (homepage/about me), sarahchen.io/projects (lists all projects), and sarahchen.io/projects/<name> for each project page. The three main projects: 'gitflow' (a CLI tool, free, on GitHub), 'codepeek' (a VS Code extension, free, on VS Code Marketplace), and 'devboard' (a web app, freemium — free tier + $9/mo pro). My profiles: github.com/sarahchen-dev, linkedin.com/in/sarahchendev. Domain is sarahchen.io.",
+    "I'd like JSON-LD for the homepage, the projects index, and a template for individual project pages. For the individual project page, use 'gitflow' as the example — it's at sarahchen.io/projects/gitflow, has an OG image at /images/og/gitflow.png, and the GitHub repo is github.com/sarahchen-dev/gitflow."
+  ]
+}
