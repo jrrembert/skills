@@ -1,0 +1,38 @@
+{
+  "name": "add-json-ld",
+  "skill_path": "../../../add-json-ld/SKILL.md",
+  "force_prompt": "OK, based on everything I've shared, please generate the complete JSON-LD blocks for my site. Give me the actual <script type=\"application/ld+json\"> tags I can paste into each page's <head>.",
+  "parser_prompt": "You extract structural information about JSON-LD output from a natural-language assistant response.\n\nGiven the final assistant message (which should contain JSON-LD structured data), return a strict JSON object with this exact shape:\n\n{\n  \"has_script_tag\": true,\n  \"has_context\": true,\n  \"has_graph\": true,\n  \"node_types\": [\"WebSite\", \"Person\", \"ProfilePage\"],\n  \"node_count\": 3,\n  \"has_person_node\": true,\n  \"has_website_node\": true,\n  \"uses_id_references\": true,\n  \"person_has_sameas\": true,\n  \"has_breadcrumb\": false,\n  \"pages_covered\": 1,\n  \"uses_correct_id_convention\": true\n}\n\nRules:\n- has_script_tag: true if the output contains `<script type=\"application/ld+json\">` or describes placing JSON-LD in such a tag.\n- has_context: true if the output includes `\"@context\": \"https://schema.org\"` in any JSON-LD block.\n- has_graph: true if the output uses a `@graph` array structure in any JSON-LD block.\n- node_types: list of all distinct `@type` values found across all JSON-LD blocks in the output.\n- node_count: total number of nodes across all `@graph` arrays in the output.\n- has_person_node: true if any node has @type \"Person\".\n- has_website_node: true if any node has @type \"WebSite\".\n- uses_id_references: true if nodes use `@id` to reference each other (e.g. author: { \"@id\": \"...\" }).\n- person_has_sameas: true if the Person node includes a `sameAs` array with at least one URL.\n- has_breadcrumb: true if any node has @type \"BreadcrumbList\".\n- pages_covered: number of distinct pages the output provides separate JSON-LD blocks for.\n- uses_correct_id_convention: true if @id values follow the URL-with-hash-fragment pattern (e.g. https://example.com/#person).\n\nOutput ONLY the JSON object, no prose, no code fences.",
+  "judge_task_type": "JSON-LD structured data",
+  "assertions": {
+    "requires_has_script_tag": true,
+    "requires_has_context": true,
+    "requires_has_graph": true,
+    "node_count_min": 2,
+    "requires_has_person_node": true,
+    "requires_has_website_node": true,
+    "requires_uses_id_references": true
+  },
+  "judge_dimensions": [
+    {
+      "name": "schema_correctness",
+      "description": "The JSON-LD uses valid schema.org types and properties. No made-up fields, correct nesting, proper use of @context and @graph."
+    },
+    {
+      "name": "node_selection",
+      "description": "The right combination of node types is included for the page(s) described — e.g., a personal homepage should have WebSite, Person, and ProfilePage; a blog post should add BlogPosting and BreadcrumbList."
+    },
+    {
+      "name": "id_linking",
+      "description": "Nodes correctly use @id references to link to each other — e.g., BlogPosting.author references Person's @id, WebPage.isPartOf references WebSite's @id. IDs follow the URL#fragment convention."
+    },
+    {
+      "name": "completeness",
+      "description": "Fields are filled in with the user's actual values (domain, name, profile URLs) rather than generic placeholders. Person.sameAs includes the profile links the user mentioned. Dates, images, and descriptions are populated where the user provided them."
+    },
+    {
+      "name": "actionability",
+      "description": "Which response would actually help the user add working JSON-LD to their site? Can they paste the output into their HTML and have it work immediately (or after replacing a few clearly-marked placeholders)?"
+    }
+  ]
+}

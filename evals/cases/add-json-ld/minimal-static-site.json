@@ -1,0 +1,9 @@
+{
+  "name": "minimal-static-site",
+  "description": "Non-technical user with a hand-coded static site, overwhelmed by schema.org. The skill should suggest starting with just the homepage and keep it simple. Tests whether the output is approachable rather than exhaustive.",
+  "initial_prompt": "I have a tiny personal website I hand-coded — just HTML and CSS, no build tools or anything. I keep hearing I should add structured data for SEO but honestly I'm a bit overwhelmed by all the schema.org stuff. What's the minimum I should add to actually make a difference?",
+  "scripted_user_replies": [
+    "The site is alexmoreno.com. It has three pages: a homepage with my bio, a page listing my photography work, and a contact page. I'm a freelance photographer. I have an Instagram (@alexmoreno.photo) and a portfolio on Adobe Portfolio (alexmoreno.myportfolio.com). No blog.",
+    "OK let's just do the homepage for now — I can always add more later. Keep it as simple as possible."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "developer-blog",
+  "description": "Developer with a blog. Needs JSON-LD for the homepage, blog index, and individual posts. Tests BlogPosting, Blog, BreadcrumbList, and correct author cross-referencing.",
+  "initial_prompt": "I run a technical blog at marcuswei.com/blog where I write about systems programming and Rust. I want to add JSON-LD so my posts show up with rich snippets in Google — author info, publish dates, that kind of thing. I also have a homepage at marcuswei.com that's a simple about page.",
+  "scripted_user_replies": [
+    "The site structure is: marcuswei.com (homepage/about), marcuswei.com/blog (index listing all posts), and marcuswei.com/blog/<slug> for individual posts. I'm a staff engineer at Cloudflare. Profiles: github.com/marcuswei, twitter.com/marcuswei, linkedin.com/in/marcuswei. Each blog post has a title, publish date, last-modified date, and an OG image at /images/og/<slug>.png (1200x630).",
+    "Yes, I want JSON-LD for all three page types — homepage, blog index, and individual posts. The blog is built with Astro so I can template the JSON-LD per page type. Let's do it."
+  ]
+}

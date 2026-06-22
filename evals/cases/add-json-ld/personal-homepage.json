@@ -1,0 +1,9 @@
+{
+  "name": "personal-homepage",
+  "description": "Simple personal site with just a homepage. Should produce WebSite, Person, and ProfilePage nodes with proper @id linking.",
+  "initial_prompt": "I have a simple personal website at janekim.dev — just a single homepage with a short bio, links to my GitHub and LinkedIn, and a photo. I want to add structured data so Google and AI tools can properly identify who I am and what the site is about.",
+  "scripted_user_replies": [
+    "It's just the one page — no blog, no portfolio section, just an about-me homepage. The domain is janekim.dev. I'm a product designer at Stripe. My profiles: github.com/janekim, linkedin.com/in/janekimdesign, and I'm @janekim on Mastodon (mastodon.design).",
+    "That sounds right — WebSite, Person, and ProfilePage. I don't need BreadcrumbList since it's a single page. Let's go with that."
+  ]
+}
