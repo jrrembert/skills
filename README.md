@@ -4,6 +4,8 @@
 
 Agent skills by [@jrrembert](https://github.com/jrrembert), discoverable on [skills.sh](https://skills.sh).
 
+Public site: <https://jrrembert.github.io/skills/>
+
 ## Install
 
 ```bash
