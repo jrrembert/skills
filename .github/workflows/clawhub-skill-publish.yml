@@ -1,0 +1,38 @@
+name: Publish skills to ClawHub
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Preview changes without publishing
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  dry-run:
+    if: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.dry_run) }}
+    uses: openclaw/clawhub/.github/workflows/skill-publish.yml@main
+    with:
+      owner: jrrembert
+      root: "."
+      dry_run: true
+
+  publish:
+    if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && !inputs.dry_run) }}
+    uses: openclaw/clawhub/.github/workflows/skill-publish.yml@main
+    with:
+      owner: jrrembert
+      root: "."
+      dry_run: false
+      tags: latest
+      bump: patch
+    secrets:
+      clawhub_token: ${{ secrets.CLAWHUB_TOKEN }}

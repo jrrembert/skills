@@ -1,0 +1,9 @@
+# Keep local/editor artifacts out of published skill bundles.
+.DS_Store
+*.zip
+.env
+.env.*
+__pycache__/
+*.pyc
+.claude/
+.gstack/

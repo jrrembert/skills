@@ -1,6 +1,11 @@
 ---
 name: goal-decomposer
-description: Decompose a big idea, ambition, or vague life direction into simple, concrete sprint goals with built-in accountability. Use this skill whenever the user talks about wanting to accomplish something but doesn't have a clear plan, mentions feeling stuck or unproductive, wants to set goals for a period of non-employment or exploration, asks for help breaking down an idea into steps, wants accountability or structure around work or personal goals, mentions sprints or goal-setting frameworks, or says things like "I want to figure out what to do next," "help me stay on track," "I have too many ideas," or "I need a plan." Also trigger when the user is between jobs, exploring, on sabbatical, freelancing, or in any unstructured phase where self-directed goal-setting matters.
+description: Turn fuzzy ambitions into practical two-week sprint plans with concrete goals, work/personal balance, and lightweight accountability. Use this skill for goal-setting, life planning, side projects, job-search structure, sabbaticals, freelance planning, habit resets, personal productivity, or any user who says they feel stuck, scattered, unproductive, between jobs, unsure what to do next, overloaded with ideas, or in need of a clear plan and accountability.
+version: 1.0.0
+metadata:
+  openclaw:
+    emoji: "🎯"
+    homepage: https://github.com/jrrembert/skills/tree/main/goal-decomposer
 ---
 
 # Goal Decomposer
