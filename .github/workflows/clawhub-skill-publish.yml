@@ -33,6 +33,5 @@ jobs:
       root: "."
       dry_run: false
       tags: latest
-      bump: patch
     secrets:
       clawhub_token: ${{ secrets.CLAWHUB_TOKEN }}
